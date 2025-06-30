@@ -1,0 +1,19 @@
+body {
+    background-color: dodgerblue ;
+    height: 600px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.flex-container {
+    display: flex;
+    padding: 10px;
+    margin: 0;
+}
+
+.flex-container p {
+    background-color: white;
+    padding: 10px;
+    margin: 5px;
+
+}
