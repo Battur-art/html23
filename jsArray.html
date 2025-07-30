@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        //Ex1:
+        const carsArray = ["Toyota", "Nissan", "Lexus", "Hyundai", "KIA", ];
+        console.log(carsArray[2]);
+        //Ex2:
+        const animals = ["Lion", "Tiger", "Elephant", "Giraffe",];
+        animals.splice(1, 1, "Panda");
+        console.log(animals);
+        //Ex3:
+        const books = ["1984", "Brave New World", "Fahrenheit 451"];
+        books.push("book1", "book2");
+        console.log(books);
+        //Ex4:
+        const numbers = [10, 20, 30, 40, 50]; 
+        console.log(numbers.indexOf(30));
+        //Ex5;
+        const fruits1 = ["Banana", "Mango", "Grapes",];
+        const fruits2 = ["Apple", "Orange", "Blueberry",];
+        const allFruits = fruits1.concat(fruits2);  
+        console.log(allFruits);
+        //Ex6:
+        const colors = ["Red", "Green", "Blue", "Yellow", "Purple"];
+        console.log(colors.includes("Red"));     // true
+        console.log(colors.includes("Green"));   // true
+        console.log(colors.includes("Black"));   // false
+        console.log(colors.includes("Pink"));    // false
+        console.log(colors.includes("Blue"));    // true 
+        //Ex7:
+        function isSameLength(arr1, arr2) {
+        return arr1.length === arr2.length;
+        }
+        const array1 = ["a", "b", "c"];
+        const array2 = ["a", "b", "c"];
+        console.log(isSameLength(array1, array2)); // true
+        //Ex8:
+        const words = ["JavaScript", "is", "a", "versatile", "language"];
+        const sentence = words.join(" ");
+        console.log(sentence); // JavaScript is a versatile language
+        //ex1:
+        const students = [
+            { name: "Anu", grade: 85 },
+            { name: "Bold", grade: 92 },
+            { name: "Tuvshin", grade: 78 },
+            { name: "Naraa", grade: 88 },
+            { name: "Solongo", grade: 95 }
+        ];
+        const topStudents = [];
+        students.forEach(student => {
+        if (student.grade > 90) {
+        topStudents.push(student);
+        }
+        });
+        console.log(topStudents);
+        students.sort((a, b) => b.grade - a.grade);
+        console.log(students);
+        const topStudent = students.find(student => student.grade === students[0].grade);
+        console.log(topStudent);
+        const products = [
+            { id: 1, name: "Laptop", price: 2500 },
+            { id: 2, name: "Mouse", price: 25 },
+            { id: 3, name: "Monitor", price: 400 },
+            { id: 4, name: "Keyboard", price: 100 },
+            { id: 5, name: "Phone", price: 1200 }
+        ];
+        const cheapProductNames = [];
+        products.forEach(product => {
+        if (product.price < 500) {
+        cheapProductNames.push(product.name);
+        }
+        });
+    </script>
+</body>
+</html>
