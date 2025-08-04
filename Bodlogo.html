@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+   <main>
+    <div>
+        <img src="zuragnuud/slide-1.webp" alt="">
+    </div>
+    <div>
+        <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Corporis error quisquam reiciendis deleniti inventore quae omnis, repellendus velit soluta iusto labore assumenda, ipsa architecto odio nisi odit? In, at accusamus!</p>
+        <h2>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quae ducimus autem quidem dolor nulla similique ea amet impedit, corrupti molestias tempore aliquam vel sint voluptatibus minus odio explicabo. Fugiat, molestias.</h2>
+    </div>
+   </main>
+</body>
+    <script>
+        let rows = 5;
+
+        for (let i = 1; i <= rows; i++) {
+        let spaces = " ".repeat(rows - i);
+        let stars = "*".repeat(2 * i - 1);
+        console.log(spaces + stars);
+        }
+        function isNumberPalindrome(num) {
+        const str = num.toString();
+        const reversed = str.split('').reverse().join('');
+        return str === reversed;
+        }
+        console.log(isNumberPalindrome(121));   // true
+        console.log(isNumberPalindrome(123));   // false
+    </script>
+</html>
