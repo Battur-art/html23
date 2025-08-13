@@ -8,22 +8,24 @@
 </head>
 <body>
   <header>
-    <div class="logo">
-       
-    </div>
-    <nav>
+      <nav>
      
-      <h1 class="logo">PORCHE</h1>
+      <h1 class="logo">NETFLIX</h1>
    
-      <a href="#">home</a>
+      <a href="index.html">home</a>
       <a href="#">series</a>
       <a href="#">movie</a>
       <a href="#">Latest content</a>  
       <a href="#">My Wishlist</a>
+      <div class="searchBar">
+        <i class="searchIcon">🔍</i>
+        <input type="text" id="searchInput" placeholder="Search movies..." />
+      </div>
     </nav>
+    
   </header>
-    <iframe width="560" height="315" 
-    src="https://www.youtube.com/embed/ZieW_OSkuiQ?autoplay=1&mute=1&loop=1&si=EAt2x3WKRgFo_rj3" 
+    <iframe 
+    src="https://www.youtube.com/embed/nb_fFj_0rq8?playlist=nb_fFj_0rq8&autoplay=1&mute=1&loop=1&si=19vhHCZiI9A2ZQsx" 
     title="YouTube video player" frameborder="0" 
     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share; fullscreen;" 
     referrerpolicy="strict-origin-when-cross-origin" id="backgroundVideo"></iframe>
@@ -35,7 +37,7 @@
     </section>
 
     <section class="section">
-      <h2>I dunno</h2>
+      <h2>Anime</h2>
       <div class="row">
         <div class="scroller" id="ghibli-row"></div>
       </div>
@@ -53,7 +55,7 @@
   <div class="modal" id="modal">
     <div class="modal-card" role="dialog" aria-modal="true">
       <button class="close" id="closeBtn">✕</button>
-      <div style="display:flex;gap:18px;flex-wrap:wrap">
+      <!-- <div style="display:flex;gap:18px;flex-wrap:wrap"> -->
         <img id="modalImg" src="" alt="poster"/>
         <div class="modal-body">
           <h2 id="modalTitle">Title</h2>
@@ -67,12 +69,24 @@
       </div>
     </div>
   </div>
-
+   
+      <footer>
+       
+        <!-- <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTF8pwnu2L8T26HWRwhMB36BPN7tGSSxFFQxQ&s" alt=""> -->
+        
+        <p>&copy; 2025 Миний Веб. Copy hiiseniin alna.</p>
+        <p>
+          <a href="instagram">Facebook</a> | 
+          <a href="#">Instagram</a> | 
+          <a href="#">Contact</a>
+        </p>
+      </footer>
+   
   <script>
     // API endpoint you gave
     const API = 'https://ghibliapi.vercel.app/films';
 
-    // helper: safe image pick (some entries include 'image' or 'movie_banner')
+    // helper: safe image pick (some entries include 'image' or 'movie_banner') 
     function pickImage(item){
       if(item.image) return item.image;
       if(item.movie_banner) return item.movie_banner;
@@ -85,7 +99,7 @@
       div.className='card';
       const imageUrl = pickImage(item);
       div.innerHTML = `
-        <div class="badge">G</div>
+        <div class="badge">㊑ぁ</div>
         <img loading="lazy" src="${imageUrl}" alt="${escapeHtml(item.title)}" />
         <div class="meta">
           <div class="title">${escapeHtml(item.title)}</div>
@@ -152,6 +166,38 @@
     document.getElementById('closeBtn').onclick = ()=>modal.classList.remove('open');
     modal.onclick = (e)=>{ if(e.target===modal) modal.classList.remove('open') }
 
+    let allMovies = [];
+
+      async function loadGhibli(){
+        try{
+          const res = await fetch(API);
+          if(!res.ok) throw new Error('API error '+res.status);
+          const data = await res.json();
+          allMovies = data;
+          showMovies(data);
+        }catch(err){
+          console.error(err);
+        }
+      }
+
+      function showMovies(list){
+        const row = document.getElementById('ghibli-row');
+        const row2 = document.getElementById('ghibli-row-2');
+        row.innerHTML = '';
+        row2.innerHTML = '';
+        list.slice(0,10).forEach(item=>row.appendChild(makeCard(item)));
+        list.slice(10,20).forEach(item=>row2.appendChild(makeCard(item)));
+      }
+
+      document.getElementById('searchInput').addEventListener('input', function(){
+        const query = this.value.toLowerCase();
+        const filtered = allMovies.filter(movie =>
+          movie.title.toLowerCase().includes(query)
+        );
+        showMovies(filtered);
+      });
+
+loadGhibli();
     // UX: horizontal wheel scroll
     document.addEventListener('wheel', (e)=>{
       // nothing; specific rows handled below
