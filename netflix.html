@@ -12,7 +12,7 @@
      
       <h1 class="logo">NETFLIX</h1>
    
-      <a href="index.html">home</a>
+      <a href="#">home</a>
       <a href="#">series</a>
       <a href="#">movie</a>
       <a href="#">Latest content</a>  
@@ -24,12 +24,14 @@
     </nav>
     
   </header>
+  <div class="divContainer">
     <iframe 
-    src="https://www.youtube.com/embed/nb_fFj_0rq8?playlist=nb_fFj_0rq8&autoplay=1&mute=1&loop=1&si=19vhHCZiI9A2ZQsx" 
+  
+    src="https://www.youtube.com/embed/EUJlIXzfKYI?playlist=EUJlIXzfKYI&autoplay=1&mute=1&loop=1&si=JTepeabZZhCIbs8x" 
     title="YouTube video player" frameborder="0" 
     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share; fullscreen;" 
     referrerpolicy="strict-origin-when-cross-origin" id="backgroundVideo"></iframe>
-
+  </div>
   <main>
     <section class="hero">
       <div class="hero-content">
@@ -68,7 +70,7 @@
         </div>
       </div>
     </div>
-  </div>
+  </div>  
    
       <footer>
        
@@ -76,8 +78,8 @@
         
         <p>&copy; 2025 Миний Веб. Copy hiiseniin alna.</p>
         <p>
-          <a href="instagram">Facebook</a> | 
-          <a href="#">Instagram</a> | 
+          <a href="instagram">Facebook</a> 
+          <a href="#">Instagram</a> 
           <a href="#">Contact</a>
         </p>
       </footer>
@@ -98,7 +100,7 @@
       const div = document.createElement('div');
       div.className='card';
       const imageUrl = pickImage(item);
-      div.innerHTML = `
+      div.innerHTML = `             
         <div class="badge">㊑ぁ</div>
         <img loading="lazy" src="${imageUrl}" alt="${escapeHtml(item.title)}" />
         <div class="meta">
@@ -117,30 +119,12 @@
         .replace(/</g, "&lt;")
         .replace(/>/g, "&gt;")
         .replace(/"/g, "&quot;")
-        .replace(/'/g, "&#039;");
+        .replace(/'/g, "&#039;"); 
     }
 
-    async function loadGhibli(){
-      try{
-        const res = await fetch(API);
-        if(!res.ok) throw new Error('API error '+res.status);
-        const data = await res.json();
-        // data is array of films
-        const row = document.getElementById('ghibli-row');
-        const row2 = document.getElementById('ghibli-row-2');
-
-        // choose how many to show
-        data.slice(0,10).forEach(item=>row.appendChild(makeCard(item)));
-        data.slice(10,20).forEach(item=>row2.appendChild(makeCard(item)));
-      }catch(err){
-        console.error('Failed loading Ghibli API',err);
-        const row = document.getElementById('ghibli-row');
-        row.innerHTML = '<div style="color:var(--muted);padding:12px">Failed to load films. Try again later.</div>';
-      }
-    }
-
-    // modal behavior (preview card)
-    const modal = document.getElementById('modal');
+    
+  // modal behavior (preview card)
+  const modal = document.getElementById('modal');
     const modalImg = document.getElementById('modalImg');
     const modalTitle = document.getElementById('modalTitle');
     const modalDesc = document.getElementById('modalDesc');
@@ -198,25 +182,7 @@
       });
 
 loadGhibli();
-    // UX: horizontal wheel scroll
-    document.addEventListener('wheel', (e)=>{
-      // nothing; specific rows handled below
-    }, {passive:true});
-
-    // attach horizontal scroll handling after rows exist
-    function enableRowWheel(){
-      document.querySelectorAll('.scroller').forEach(el=>{
-        el.addEventListener('wheel', e=>{
-          if(Math.abs(e.deltaX) < Math.abs(e.deltaY)){
-            e.preventDefault();
-            el.scrollLeft += e.deltaY;
-          }
-        });
-      });
-    }
-
-    // init
-    loadGhibli().then(enableRowWheel);
+   
   </script>
 </body>
 </html>
